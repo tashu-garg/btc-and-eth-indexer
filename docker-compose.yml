@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   postgres:
-    container_name: indexer_postgres
+    container_name: indexer
     image: postgres:15-alpine
     restart: always
     environment:

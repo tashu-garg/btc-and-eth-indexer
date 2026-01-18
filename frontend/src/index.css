@@ -1,39 +1,47 @@
 @import "tailwindcss";
 
-:root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+@theme {
+  --color-background: #0a0b0d;
+  --color-surface: #15171b;
+  --color-surface-hover: #1c1e24;
+  --color-primary: #3b82f6;
+  --color-primary-glow: #3b82f633;
+  --color-accent: #06b6d4;
+  --color-border: #23262d;
+  --color-text-muted: #94a3b8;
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+@layer base {
+  body {
+    @apply bg-background text-white selection:bg-primary/30;
+  }
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full hover:bg-white/20 transition-colors;
+}
+
+/* Glassmorphism utility */
 .glass {
-  background: rgba(18, 18, 18, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  @apply bg-surface/60 backdrop-blur-md border border-border;
 }
 
-.card-gradient {
-  background: linear-gradient(
-    145deg,
-    rgba(31, 41, 55, 0.4) 0%,
-    rgba(18, 18, 18, 0.6) 100%
-  );
+/* Animation Utilities */
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
