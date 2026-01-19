@@ -19,7 +19,7 @@ A high-performance Ethereum and Bitcoin indexer with a modern React dashboard.
 
 ### 1. Environment Configuration
 
-Edit the `.env` file in the root directory:
+Create a `.env` file in the project root with the following contents:
 
 ```env
 DB_HOST=localhost
@@ -54,7 +54,15 @@ The dashboard will be available at `http://localhost:5173`.
 
 For production deployment:
 
-1. Build the frontend: `npm run build`
-2. Serve the `dist` folder via Nginx or the Go server.
-3. Use a process manager like Docker or systemd for the Go binary.
-# btc-and-eth-indexer
+1. **Build the Docker image**:
+   ```bash
+   docker build -t indexer-backend:latest .
+   ```
+2. **Run the container** (adjust ports and env vars as needed):
+   ```bash
+   docker run -d -p 8989:8080 \
+     --env-file .env \
+     --name indexer indexer-backend:latest
+   ```
+3. **Frontend**: Build the frontend with `npm run build` and serve the `dist` folder via Nginx or any static server.
+4. Use a process manager like Docker Compose or systemd to orchestrate the Go backend, frontend, PostgreSQL, and Redis services.
