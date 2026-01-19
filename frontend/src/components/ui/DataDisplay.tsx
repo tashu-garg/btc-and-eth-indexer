@@ -15,7 +15,7 @@ export const CopyButton = ({ text }: { text: string }) => {
   );
 };
 
-export const AddressDisplay = ({ address }: { address: string }) => {
+export const AddressDisplay = ({ address, full = true }: { address: string, full?: boolean }) => {
   if (address === 'coinbase') {
     return (
       <span className="bg-orange-500/10 text-orange-500 text-[10px] font-bold px-2 py-0.5 rounded ring-1 ring-orange-500/20 uppercase">
@@ -37,8 +37,8 @@ export const AddressDisplay = ({ address }: { address: string }) => {
     const [main, count] = address.split(',+');
     return (
       <div className="flex items-center gap-2">
-        <span className="font-mono text-sm text-text-muted truncate max-w-[120px]">
-          {main.substring(0, 6)}...{main.substring(main.length - 4)}
+        <span className={`font-mono text-sm text-text-muted ${full ? 'max-w-none break-all' : 'truncate max-w-[120px]'}`}>
+          {full ? main : `${main.substring(0, 6)}...${main.substring(main.length - 4)}`}
         </span>
         <span className="bg-primary/10 text-primary text-[9px] font-bold px-1.5 py-0.5 rounded ring-1 ring-primary/20">
           +{count}
@@ -49,8 +49,8 @@ export const AddressDisplay = ({ address }: { address: string }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="font-mono text-sm text-text-muted truncate max-w-[160px]">
-        {address.length > 16 ? `${address.substring(0, 8)}...${address.substring(address.length - 6)}` : address}
+      <span className={`font-mono text-sm text-text-muted ${full ? 'max-w-none break-all' : 'truncate max-w-[160px]'}`}>
+        {(address.length > 16 && !full) ? `${address.substring(0, 8)}...${address.substring(address.length - 6)}` : address}
       </span>
       <CopyButton text={address} />
     </div>

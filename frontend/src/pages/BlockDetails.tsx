@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getBlock } from '../services/api';
 import type { BlockDetails as IBlockDetails } from '../services/api';
-import { Table, CopyButton, AddressDisplay } from '../components/ui/DataDisplay';
+import { Table, AddressDisplay } from '../components/ui/DataDisplay';
 import { format } from 'date-fns';
 import { ChevronLeft, Box, Clock, Hash, ListChecks, ArrowRightLeft } from 'lucide-react';
 import { BTCIcon, ETHIcon } from '../components/ui/Icons';
@@ -81,11 +81,8 @@ const BlockDetails = ({ chain }: { chain: 'btc' | 'eth' }) => {
         <Table headers={['Hash', 'From', 'To', 'Value']}>
           {block.transactions.map((tx) => (
             <tr key={tx.hash} className="hover:bg-surface-hover/50 transition-colors">
-              <td className="px-6 py-4 font-mono text-sm max-w-[200px]">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary truncate">{tx.hash}</span>
-                  <CopyButton text={tx.hash} />
-                </div>
+              <td className="px-6 py-4">
+                <AddressDisplay address={tx.hash} />
               </td>
               <td className="px-6 py-4 font-mono text-sm text-text-muted">
                 <AddressDisplay address={tx.from} />
