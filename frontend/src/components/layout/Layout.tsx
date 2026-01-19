@@ -42,7 +42,7 @@ export const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <a href="https://github.com" target="_blank" rel="noreferrer" className="text-text-muted hover:text-white transition-colors">
+        <a href="https://github.com/tashu-garg/btc-and-eth-indexer.git" target="_blank" rel="noreferrer" className="text-text-muted hover:text-white transition-colors">
           <Github className="w-5 h-5" />
         </a>
       </div>
